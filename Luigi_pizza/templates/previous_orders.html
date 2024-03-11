@@ -1,0 +1,43 @@
+{% extends 'base.html' %}
+{% block content %}
+<div class="container mt-5">
+    <h1 class="text-center mb-4"><strong>Previous Orders</strong></h1>
+    <div class="row justify-content-center">
+        <div class="col-md-8">
+            <div class="mb-4 text-center">
+                <a href="{% url 'create_pizza' %}" class="btn btn-primary">Make a new order</a>
+            </div>
+            {% for order in orders %}
+            <div class="card mb-4">
+                <div class="card-header">
+                    <h5 class="card-title mb-0">Order Placed on: {{ order.placed_at }}</h5>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Order Details</h5>
+                    <p class="card-text"><strong>Name:</strong> {{ order.name }}</p>
+                    <p class="card-text"><strong>Delivery Address:</strong> {{ order.delivery_address }}</p>
+                </div>
+                <div class="card-body">
+                    <h5 class="card-title">Payment Details</h5>
+                    <p class="card-text"><strong>Card Number:</strong> {{ order.card_number }}</p>
+                    <p class="card-text"><strong>Expiry Date:</strong> {{ order.expiry_date }}</p>
+                    <p class="card-text"><strong>CVV:</strong> {{ order.cvv }}</p>
+                </div>
+                <!-- Fetch pizza details associated with the order -->
+                {% with pizza=order.pizza %}
+                <div class="card-body">
+                    <h5 class="card-title">Pizza Details</h5>
+                    <p class="card-text"><strong>Size:</strong> {{ pizza.size }}</p>
+                    <p class="card-text"><strong>Crust:</strong> {{ pizza.crust }}</p>
+                    <p class="card-text"><strong>Sauce:</strong> {{ pizza.sauce }}</p>
+                    <p class="card-text"><strong>Cheese:</strong> {{ pizza.cheese }}</p>
+                    <p class="card-text"><strong>Toppings:</strong> {{ pizza.selected_toppings|join:", " }}</p>
+                    <!-- Add other pizza details as needed -->
+                </div>
+                {% endwith %}
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+</div>
+{% endblock %}

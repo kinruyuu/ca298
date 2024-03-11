@@ -1,0 +1,25 @@
+body {
+   display: flex;
+   flex-direction: column;
+   min-height: 100vh;
+}
+
+.container.mt-4 {
+   flex: 1;
+}
+
+.home-content {
+  background-image: url("{% static 'images/pizza_background.jpg' %}");
+  background-size: cover;
+  background-position: center;
+  height: auto; /* Adjusted from 100vh to auto */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+}
+
+.home-content h1,
+.home-content p {
+  font-family: 'Arial', sans-serif;
+}

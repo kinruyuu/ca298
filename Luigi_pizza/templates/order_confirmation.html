@@ -1,0 +1,35 @@
+{% extends 'base.html' %}
+{% block title %}Order Confirmation{% endblock %}
+{% block content %}
+<div class="container mt-5">
+    <div class="card">
+        <div class="card-body">
+            <h2>Order Confirmation</h2>
+            <p>Thank you for your order!</p>
+            <h3>Order Details:</h3>
+            <p><strong>Name:</strong> {{ order.name }}</p>
+            <p><strong>Delivery Address:</strong> {{ order.delivery_address }}</p>
+            <p><strong>Placed At:</strong> {{ order.placed_at }}</p>
+            <p>Your order will delivered in 20 minutes</p>
+            
+            <!-- Fetch pizza details associated with the order -->
+            {% with pizza=order.pizza %}
+            <h3>Pizza Details:</h3>
+            <p><strong>Size:</strong> {{ pizza.size }}</p>
+                <p><strong>Crust:</strong> {{ pizza.crust }}</p>
+                <p><strong>Sauce:</strong> {{ pizza.sauce }}</p>
+                <p><strong>Cheese:</strong> {{ pizza.cheese }}</p>
+                <p><strong>Toppings:</strong>
+                    {% for topping in pizza.selected_toppings %}
+                        {{ topping }}{% if not forloop.last %},{% endif %}
+                    {% endfor %}
+                </p>
+            <!-- Add other pizza details as needed -->
+            {% endwith %}
+            
+            <!-- Button to show previous orders -->
+            <a href="{% url 'previous_orders' %}" class="btn btn-primary">Show Previous Orders</a>
+        </div>
+    </div>
+</div>
+{% endblock %}
